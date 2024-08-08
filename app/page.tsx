@@ -13,7 +13,7 @@ export default function Home() {
                             Your Interactive PDF Genie
                         </h2>
                         <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-6xl text-center">
-                            Interact with our genie to learn more about ur PDFs
+                            Interact with our genie to learn more about your PDFs
                         </p>
                         <p className="mt-6 text-lg leading 8 text-gray-600">
                             Introducing{" "}
