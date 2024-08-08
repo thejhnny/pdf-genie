@@ -4,15 +4,13 @@ import { FormEvent, useEffect, useRef, useState, useTransition } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Loader2Icon } from "lucide-react";
-// import ChatMessage from "./ChatMessage";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { useUser } from "@clerk/nextjs";
 import { collection, orderBy, query } from "firebase/firestore";
 import { db } from "@/firebase";
-// import ChatMessage from "./ChatMessage";
-// import { useToast } from "./ui/use-toast";
 import { askQuestion } from "@/actions/askQuestion";
 import ChatMessage from "./ChatMessage";
+import { useToast } from "./ui/use-toast";
 
 export type Message = {
     id?: string;
@@ -22,6 +20,7 @@ export type Message = {
 };
 function Chat({ id }: { id: string }) {
     const { user } = useUser();
+    const { toast } = useToast();
 
     const [input, setInput] = useState("");
     const [messages, setMessages] = useState<Message[]>([]);
@@ -58,7 +57,11 @@ function Chat({ id }: { id: string }) {
             const { success, message } = await askQuestion(id, q);
 
             if (!success) {
-                // TODO: Toast notification
+                toast({
+                    variant: "destructive",
+                    title: "Error",
+                    description: message,
+                });
 
                 setMessages((prev) =>
                     prev.slice(0, prev.length - 1).concat([
