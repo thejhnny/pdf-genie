@@ -1,6 +1,5 @@
 import { adminDb } from "@/firebaseAdmin";
 import stripe from "@/lib/stripe";
-import { sign } from "crypto";
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
